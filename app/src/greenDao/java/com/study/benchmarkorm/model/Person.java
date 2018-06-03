@@ -36,15 +36,16 @@ public class Person{
     public Person() {
     }
 
-    @Generated(hash = 2135609568)
+    @Generated(hash = 1047572942)
     public Person(Long id, String firstName, String secondName, Date birthdayDate,
-            String gender, long phone) {
+            String gender, long phone, long libraryId) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.birthdayDate = birthdayDate;
         this.gender = gender;
         this.phone = phone;
+        this.libraryId = libraryId;
     }
 
     public Person(@NotNull String firstName, @NotNull String secondName,
@@ -112,9 +113,9 @@ public class Person{
     }
 
     /** To-one relationship, resolved on first access. */
-    @Generated(hash = 290165030)
+    @Generated(hash = 285447146)
     public Library getLibrary() {
-        Long __key = this.id;
+        long __key = this.libraryId;
         if (library__resolvedKey == null || !library__resolvedKey.equals(__key)) {
             final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
@@ -131,12 +132,16 @@ public class Person{
     }
 
     /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1817530046)
-    public void setLibrary(Library library) {
+    @Generated(hash = 903956665)
+    public void setLibrary(@NotNull Library library) {
+        if (library == null) {
+            throw new DaoException(
+                    "To-one property 'libraryId' has not-null constraint; cannot set to-one to null");
+        }
         synchronized (this) {
             this.library = library;
-            id = library == null ? null : library.getId();
-            library__resolvedKey = id;
+            libraryId = library.getId();
+            library__resolvedKey = libraryId;
         }
     }
 
@@ -174,6 +179,14 @@ public class Person{
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public long getLibraryId() {
+        return this.libraryId;
+    }
+
+    public void setLibraryId(long libraryId) {
+        this.libraryId = libraryId;
     }
 
     /** called by internal mechanisms, do not call yourself. */

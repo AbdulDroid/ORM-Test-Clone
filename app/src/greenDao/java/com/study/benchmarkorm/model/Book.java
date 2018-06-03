@@ -39,13 +39,15 @@ public class Book{
         this.libraryId = library.getId();
     }
 
-    @Generated(hash = 2026124379)
-    public Book(Long id, String author, String title, int pagesCount, int bookId) {
+    @Generated(hash = 220963724)
+    public Book(Long id, String author, String title, int pagesCount, int bookId,
+            long libraryId) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.pagesCount = pagesCount;
         this.bookId = bookId;
+        this.libraryId = libraryId;
     }
 
     @Generated(hash = 1839243756)
@@ -97,9 +99,9 @@ public class Book{
     }
 
     /** To-one relationship, resolved on first access. */
-    @Generated(hash = 290165030)
+    @Generated(hash = 285447146)
     public Library getLibrary() {
-        Long __key = this.id;
+        long __key = this.libraryId;
         if (library__resolvedKey == null || !library__resolvedKey.equals(__key)) {
             final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
@@ -116,12 +118,16 @@ public class Book{
     }
 
     /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1817530046)
-    public void setLibrary(Library library) {
+    @Generated(hash = 903956665)
+    public void setLibrary(@NotNull Library library) {
+        if (library == null) {
+            throw new DaoException(
+                    "To-one property 'libraryId' has not-null constraint; cannot set to-one to null");
+        }
         synchronized (this) {
             this.library = library;
-            id = library == null ? null : library.getId();
-            library__resolvedKey = id;
+            libraryId = library.getId();
+            library__resolvedKey = libraryId;
         }
     }
 
@@ -159,6 +165,14 @@ public class Book{
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public long getLibraryId() {
+        return this.libraryId;
+    }
+
+    public void setLibraryId(long libraryId) {
+        this.libraryId = libraryId;
     }
 
     /** called by internal mechanisms, do not call yourself. */
